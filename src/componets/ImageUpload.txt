@@ -1,0 +1,1 @@
+import React from ÒreactÓ;const ImageUpload = () => { 	const handleImageUpload = (event) => {	};	return (		<div>			<h2>Upload Image </h2>			<input type=ÓfileÓ accept=Ó.jpg, .jpegÓ onChange={handleImageUpload} />		</div>	);};Export default ImageUpload;
