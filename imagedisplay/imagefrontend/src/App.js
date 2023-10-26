@@ -1,31 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
-
-import {HomePage} from './homepage';
-import {Navigation} from './navigation';
-import {ImageList} from './imagelist';
-import {ImageUpload} from './upload';
-
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
+  const [title, setTitle] = useState('');
+  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const handleUpload = () => {
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('image', image);
+
+    axios.post('http://localhost:8000/upload/', formData)
+      .then((response) => {
+        console.log(response.data);
+        fetchImages();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const fetchImages = () => {
+    axios.get('http://localhost:8000/list/')
+      .then((response) => {
+        setImages(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
   return (
-    <BrowserRouter>
-    <div className="container">
-     <h3 className="m-3 d-flex justify-content-center">
-       
-     </h3>
+    <div>
+      <h2>Upload Image</h2>
+      <input type="text" placeholder="Title" onChange={handleTitleChange} />
+      <input type="file" accept="image/*" onChange={handleImageChange} />
+      <button onClick={handleUpload}>Upload</button>
 
-     <Navigation/>
-
-     <Routes>
-       <Route path='/' component={HomePage} exact/>
-       <Route path='/' component={ImageList} exact/>
-       <Route path="/add-image" component={ImageUpload} />
-       
-     </Routes>
+      <h2>Image List</h2>
+      <ul>
+        {images.map((image, index) => (
+          <li key={index}>
+            <img src={`http://localhost:8000${image.url}`} alt={image.title} />
+            <p>{image.title}</p>
+          </li>
+        ))}
+      </ul>
     </div>
-    </BrowserRouter>
   );
 }
 
