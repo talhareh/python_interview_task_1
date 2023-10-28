@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    /* background-color: #000300; */
+}
+.yes{
+    background-color: #4d0358;
+    color: white !important;
+}
+
+.w-full.md\:w-1\/2.px-3.mb-6.md\:mb-0.tses {
+    display: flex;
+}
+.product-card-info{
+    display: flex;
+    flex-direction: row;
+    /* margin: 20px;
+    padding: 20px; */
+  
+  }
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    width: 90%;
+    max-width: 1000px;
+    margin: 10vh auto;
+  }
+  
+  .card {
+    border-radius: 16px;
+    box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
+    max-width: 300px;
+  }
+  .information {
+    background-color: var(--c-white);
+    /* padding: 1.5rem; */
+  }
+  .title {
+    font-size: 1.5rem;
+    /* color: var(--c-void); */
+    line-height: 1.25;
+      margin-top: 1rem;
+      text-align: center;
+  }
+  .m-2.rounded.shadow-lg.info.card {
+    padding: .75em 1em;
+    /* display: flex; */
+    gap: 1rem;
+    padding: 20px;
+    padding-top: 40px;
+    position: relative;
+    text-align: center;
+    background-color: var(--c-fair-pink);
+}
+.card-body {
+    padding: 10px;
+    margin: 10px;
+}
+.topma{
+    display:flex;
+    justify-content: center;
+}
+.text-black{
+    color: white;
+}
